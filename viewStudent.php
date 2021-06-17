@@ -61,7 +61,7 @@ else {
             <p class="card-text"><strong>Email: </strong><?php echo $row_users['email'] ?></p>
             <p class="card-text"><strong>Phone: </strong><?php echo $row_users['phone'] ?></p>
             <p class="card-text"><strong>Degree: </strong><?php echo $row_users['degree'] ?></p>
-            <a href="#" class="btn btn-primary">Edit</a>
+            <a href="./editStudent.php?id=<?php echo $row_users['id'] ?>" class="btn btn-primary">Edit</a>
         </div>
         </div>
         </div>

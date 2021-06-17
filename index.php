@@ -62,7 +62,7 @@
                     <td><?php echo $row_users['phone'] ?></td>
                     <td><?php echo $row_users['degree'] ?></td>
                     <td><a href='./viewStudent.php?id=<?php echo $row_users['id'] ?>'>View Profile</a></td>
-                    <td><a href='#'>Edit Profile</a></td>
+                    <td><a href='./editStudent.php?id=<?php echo $row_users['id'] ?>'>Edit Profile</a></td>
                   </tr>
                   <?php } ?>
                 </tbody>
