@@ -49,7 +49,6 @@ else {
                 <input class="form-control mr-sm-2" name='search' type="search" placeholder="Search" aria-label="Search">
                 <button class="btn my-2 my-sm-0" type="submit">Search</button>
               </form>
-              <!-- represents a clickable button used to submit form -->
               <button class="btn btn-primary my-2 my-sm-0 ml-sm-2" type="submit" onclick="window.location.href='./addStudent.php'">+ Add Student</button>
             </div>
           </nav>

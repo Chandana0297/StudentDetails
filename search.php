@@ -1,10 +1,11 @@
 <?php 
   require('./db/connect.php'); // database connection is required
+  // to check whether a key is present or not
   if(isset( $_GET['search'])){
       $searchKey = $_GET['search'];
   }
   else {
-    $searchKey = ''; // to check whether a specific key is present an array or not
+    $searchKey = ''; 
   }
   $sql = "Select * from StudentList where fullname LIKE '%$searchKey%'";
   if(!$connect->query($sql)){
