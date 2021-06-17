@@ -1,3 +1,12 @@
+<?php 
+  require('./db/connect.php');
+  $sql = "Select * from StudentList";
+  if(!$connect->query($sql)){
+    die($connect->error);
+  }
+  $results=mysqli_query($connect,$sql);
+  $row_count=mysqli_num_rows($results);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,43 +49,19 @@
                     <th scope="col"></th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody> <?php
+                while ($row_users = mysqli_fetch_array($results)) { 
+                  ?>
                   <tr>
                     <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>aaa@gmail.com</td>
-                    <td>87955555555</td>
-                    <td>Bcom</td>
+                    <td><?php echo $row_users['fullname'] ?></td>
+                    <td><?php echo $row_users['email'] ?></td>
+                    <td><?php echo $row_users['phone'] ?></td>
+                    <td><?php echo $row_users['degree'] ?></td>
                     <td><a href='#'>View Profile</a></td>
                     <td><a href='#'>Edit Profile</a></td>
                   </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>aaa@gmail.com</td>
-                    <td>87955555555</td>
-                    <td>Bcom</td>
-                    <td><a href='#'>View Profile</a></td>
-                    <td><a href='#'>Edit Profile</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>aaa@gmail.com</td>
-                    <td>87955555555</td>
-                    <td>Bcom</td>
-                    <td><a href='#'>View Profile</a></td>
-                    <td><a href='#'>Edit Profile</a></td>
-                  </tr>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>aaa@gmail.com</td>
-                    <td>87955555555</td>
-                    <td>Bcom</td>
-                    <td><a href='#'>View Profile</a></td>
-                    <td><a href='#'>Edit Profile</a></td>
-                  </tr>
+                  <?php } ?>
                 </tbody>
               </table>
         </div>
