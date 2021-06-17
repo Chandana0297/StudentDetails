@@ -56,13 +56,14 @@
                   </tr>
                 </thead>
                 <tbody> <?php
+                $count = 1;
                 if($row_count < 1){
                   echo '<tr><td colspan="4">Sorry no students are present....</td></tr>';
                 }
                 while ($row_users = mysqli_fetch_array($results)) { 
                   ?>
                   <tr>
-                    <th scope="row">1</th>
+                  <th scope="row"><?php echo $count++; ?></th>
                     <td><?php echo $row_users['fullname'] ?></td>
                     <td><?php echo $row_users['email'] ?></td>
                     <td><?php echo $row_users['phone'] ?></td>
