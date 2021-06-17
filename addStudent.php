@@ -1,5 +1,7 @@
 <?php
-require('./db/connect.php');
+require('./db/connect.php'); // database connection is required
+
+// check if form is submitted
   if(isset($_POST['submit'])){
     $name = $_POST['fullname'];
     $email = $_POST['email'];
@@ -7,12 +9,13 @@ require('./db/connect.php');
     $degree = $_POST['degree'];
 
     // upload image
-    // converting it to base64 and storeing in database
+    // converting it to base64 and storing in database
     $base64 = '';
     if(isset($_FILES['image']))
     {
       $allowed_ext= array('jpg','jpeg','png','gif');
       $file_name =$_FILES['image']['name'];
+    // seperating the extension
       $seperateExt = explode('.',$file_name);
       $file_ext = strtolower( end($seperateExt));
       $file_size=$_FILES['image']['size'];
@@ -34,7 +37,7 @@ require('./db/connect.php');
         echo '<script>alert("Success")</script>';
       }
       else {
-        die($connect->error);
+        die($connect->error); 
       }
     }
 ?>
@@ -59,21 +62,24 @@ require('./db/connect.php');
 </head>
 <body>
     <header>
+    <!-- provides navigation links within current document or to other documents -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="./">My Student Details</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-          
+          <!--defines a section or a section in the document -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <form method='get' action='search.php' class="form-inline my-2 my-lg-0 ml-auto">
                 <input class="form-control mr-sm-2" name='search' type="search" placeholder="Search" aria-label="Search">
                 <button class="btn my-2 my-sm-0" type="submit">Search</button>
               </form>
+              <!-- clickable button in which we can put text -->
               <button class="btn btn-primary my-2 my-sm-0 ml-sm-2" type="submit" onclick="window.location.href='./addStudent.php'">+ Add Student</button>
             </div>
           </nav>
     </header>
+    <!-- defines a section in document -->
     <section class="mt-5 mb-5">
         <div class="container">
             <h1 class="text-center">Add new Student</h1>

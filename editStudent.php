@@ -1,18 +1,18 @@
 <?php
-require('./db/connect.php');
+require('./db/connect.php'); // database connection is required
 if(isset( $_GET['id'])){
-$searchId = $_GET['id'];
+$searchId = $_GET['id']; 
 $sql = "Select * from StudentList where id=$searchId";
 if(!$connect->query($sql)){
-    die($connect->error);
+    die($connect->error); // prints message 
 }
 $results=mysqli_query($connect,$sql);
-$row_users = mysqli_fetch_assoc($results);
+$row_users = mysqli_fetch_assoc($results); // fetches the row
 }
 else {
     die('Incorrect details');
 }
-  if(isset($_POST['submit'])){
+  if(isset($_POST['submit'])){ // checks whether a variable is a set or not
     $name = $_POST['fullname'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
@@ -54,6 +54,7 @@ else {
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- specifies the character encoding -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -62,7 +63,7 @@ else {
     <style>
         #img-upload{
     width: 300px;
-    height: 300px;
+    height: 300px;  
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
@@ -146,6 +147,6 @@ else {
             }
         }
     })
-</script>
+</script> 
 </body>
 </html>

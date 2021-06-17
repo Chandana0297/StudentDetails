@@ -1,5 +1,5 @@
 <?php 
-  require('./db/connect.php');
+  require('./db/connect.php'); //database connection is required 
   $sql = "Select * from StudentList";
   if(!$connect->query($sql)){
     die($connect->error);
@@ -10,6 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- specifies the character encoding -->
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,12 +19,13 @@
 </head>
 <body>
     <header>
+    <!-- defines the navigation links -->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="./">My Student Details</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
-          
+          <!-- defines a division or section in the document -->
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <form method='get' action='search.php' class="form-inline my-2 my-lg-0 ml-auto">
                 <input class="form-control mr-sm-2" name='search' type="search" placeholder="Search" aria-label="Search">
@@ -33,6 +35,7 @@
             </div>
           </nav>
     </header>
+    <!-- defines section of documents -->
     <section class="mt-5 mb-5">
     <div class="container">
         <h1 class="text-center mb-5">Welcome to My Student details List</h1>

@@ -1,17 +1,17 @@
 <?php 
-  require('./db/connect.php');
+  require('./db/connect.php'); // database connection is required
   if(isset( $_GET['search'])){
       $searchKey = $_GET['search'];
   }
   else {
-    $searchKey = '';
+    $searchKey = ''; // to check whether a specific key is present an array or not
   }
   $sql = "Select * from StudentList where fullname LIKE '%$searchKey%'";
   if(!$connect->query($sql)){
-    die($connect->error);
+    die($connect->error);  // prints message
   }
-  $results=mysqli_query($connect,$sql);
-  $row_count=mysqli_num_rows($results);
+  $results=mysqli_query($connect,$sql); //
+  $row_count=mysqli_num_rows($results); // return number of rows present in result set
 ?>
 <!DOCTYPE html>
 <html lang="en">
