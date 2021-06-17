@@ -1,11 +1,18 @@
 <?php 
   require('./db/connect.php');
-  $sql = "Select * from StudentList";
+  if(isset( $_GET['id'])){
+    $searchId = $_GET['id'];
+    $sql = "Select * from StudentList where id=$searchId";
   if(!$connect->query($sql)){
     die($connect->error);
   }
   $results=mysqli_query($connect,$sql);
+  $row_users = mysqli_fetch_assoc($results);
   $row_count=mysqli_num_rows($results);
+}
+else {
+    die('Incorrect details');
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +20,17 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details List</title>
+    <title>View Student - Student Details List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        #img{
+    width: 200px;
+    height: 200px;
+    background-position: center center;
+    background-size: contain;
+    background-repeat: no-repeat;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -35,38 +51,18 @@
     </header>
     <section class="mt-5 mb-5">
     <div class="container">
-        <h1 class="text-center mb-5">Welcome to My Student details List</h1>
+        <h1 class="text-center mb-5"><?php echo $row_users['fullname'] ?>'s Details</h1>
         <div>
-            <table class="table">
-                <thead class="thead-dark">
-                  <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Degree</th>
-                    <th scope="col"></th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody> <?php
-                if($row_count < 1){
-                  echo '<tr><td colspan="4">Sorry no students are present....</td></tr>';
-                }
-                while ($row_users = mysqli_fetch_array($results)) { 
-                  ?>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td><?php echo $row_users['fullname'] ?></td>
-                    <td><?php echo $row_users['email'] ?></td>
-                    <td><?php echo $row_users['phone'] ?></td>
-                    <td><?php echo $row_users['degree'] ?></td>
-                    <td><a href='./viewStudent.php?id=<?php echo $row_users['id'] ?>'>View Profile</a></td>
-                    <td><a href='#'>Edit Profile</a></td>
-                  </tr>
-                  <?php } ?>
-                </tbody>
-              </table>
+        <div class="card">
+        <img class="card-img-top" id='img' src="..." alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title"><?php echo $row_users['fullname'] ?></h5>
+            <p class="card-text"><strong>Email: </strong><?php echo $row_users['email'] ?></p>
+            <p class="card-text"><strong>Phone: </strong><?php echo $row_users['phone'] ?></p>
+            <p class="card-text"><strong>Degree: </strong><?php echo $row_users['degree'] ?></p>
+            <a href="#" class="btn btn-primary">Edit</a>
+        </div>
+        </div>
         </div>
     </div>
     </section>

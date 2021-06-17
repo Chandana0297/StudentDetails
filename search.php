@@ -1,6 +1,12 @@
 <?php 
   require('./db/connect.php');
-  $sql = "Select * from StudentList";
+  if(isset( $_GET['search'])){
+      $searchKey = $_GET['search'];
+  }
+  else {
+    $searchKey = '';
+  }
+  $sql = "Select * from StudentList where fullname LIKE '%$searchKey%'";
   if(!$connect->query($sql)){
     die($connect->error);
   }
@@ -13,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student Details List</title>
+    <title>Search results - Student Details List</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
@@ -25,7 +31,7 @@
             </button>
           
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <form method='get' action='search.php' class="form-inline my-2 my-lg-0 ml-auto">
+            <form method='get' action='search.php' class="form-inline my-2 my-lg-0 ml-auto">
                 <input class="form-control mr-sm-2" name='search' type="search" placeholder="Search" aria-label="Search">
                 <button class="btn my-2 my-sm-0" type="submit">Search</button>
               </form>
@@ -35,7 +41,7 @@
     </header>
     <section class="mt-5 mb-5">
     <div class="container">
-        <h1 class="text-center mb-5">Welcome to My Student details List</h1>
+        <h1 class="text-center mb-5">Search Results</h1>
         <div>
             <table class="table">
                 <thead class="thead-dark">
@@ -61,7 +67,7 @@
                     <td><?php echo $row_users['email'] ?></td>
                     <td><?php echo $row_users['phone'] ?></td>
                     <td><?php echo $row_users['degree'] ?></td>
-                    <td><a href='./viewStudent.php?id=<?php echo $row_users['id'] ?>'>View Profile</a></td>
+                    <td><a href='#'>View Profile</a></td>
                     <td><a href='#'>Edit Profile</a></td>
                   </tr>
                   <?php } ?>
