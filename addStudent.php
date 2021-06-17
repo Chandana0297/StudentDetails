@@ -5,14 +5,38 @@ require('./db/connect.php');
     $email = $_POST['email'];
     $phone = $_POST['phone'];
     $degree = $_POST['degree'];
-    $sql = "INSERT INTO StudentList (fullname, email, phone, degree) VALUES ('$name', '$email', '$phone',' $degree')";
-    if($connect->query($sql)){
-      echo '<script>alert("Success")</script>';
+
+    // upload image
+    // converting it to base64 and storeing in database
+    $base64 = '';
+    if(isset($_FILES['image']))
+    {
+      $allowed_ext= array('jpg','jpeg','png','gif');
+      $file_name =$_FILES['image']['name'];
+      $seperateExt = explode('.',$file_name);
+      $file_ext = strtolower( end($seperateExt));
+      $file_size=$_FILES['image']['size'];
+      $file_tmp= $_FILES['image']['tmp_name'];
+      $type = pathinfo($file_tmp, PATHINFO_EXTENSION);
+      $data = file_get_contents($file_tmp);
+      $base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
+      if(in_array($file_ext,$allowed_ext) === false)
+      {
+         die('upload only image format');
+      }
+      if($file_size > 2097152)
+      {
+          die('File size must be under 2mb');
+      }
     }
-    else {
-      die($connect->error);
+      $sql = "INSERT INTO StudentList (fullname, email, phone, degree, image) VALUES ('$name', '$email', '$phone',' $degree', '$base64')";
+      if($connect->query($sql)){
+        echo '<script>alert("Success")</script>';
+      }
+      else {
+        die($connect->error);
+      }
     }
-  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,13 +77,13 @@ require('./db/connect.php');
     <section class="mt-5 mb-5">
         <div class="container">
             <h1 class="text-center">Add new Student</h1>
-            <form action='' method='post'>
+            <form action='' method='post' enctype="multipart/form-data">
                 <div class="form-group">
                     <label>Upload Your Image</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
-                                Browse… <input type="file" id="img">
+                                Browse… <input type="file" name='image' id="img">
                             </span>
                         </span>
                     </div>

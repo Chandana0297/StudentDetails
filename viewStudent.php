@@ -29,6 +29,7 @@ else {
     background-position: center center;
     background-size: contain;
     background-repeat: no-repeat;
+    margin: 0 15px
         }
     </style>
 </head>
@@ -54,7 +55,7 @@ else {
         <h1 class="text-center mb-5"><?php echo $row_users['fullname'] ?>'s Details</h1>
         <div>
         <div class="card">
-        <img class="card-img-top" id='img' src="..." alt="Card image cap">
+        <div class="card-img-top" id='img' style='background-image:url(<?php echo $row_users['image'] ?>)' alt="Card image cap"></div>
         <div class="card-body">
             <h5 class="card-title"><?php echo $row_users['fullname'] ?></h5>
             <p class="card-text"><strong>Email: </strong><?php echo $row_users['email'] ?></p>
