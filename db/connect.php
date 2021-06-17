@@ -13,5 +13,5 @@ $connect = new mysqli($host,$user,$pass);
 if($connect->connect_error){
     die('Connection failed: '.$connect->connect_error);
 }
-echo 'Connect Success';
+
 ?>
