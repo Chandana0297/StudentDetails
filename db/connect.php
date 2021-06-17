@@ -7,7 +7,7 @@ $pass = 'Admin@123';
 $dbname = 'studentDetails';
 
 // create connection to database
-$connect = new mysqli($host,$user,$pass);
+$connect = new mysqli($host,$user,$pass,$dbname);
 
 // Check if connection is success
 if($connect->connect_error){

@@ -1,3 +1,19 @@
+<?php
+require('./db/connect.php');
+  if(isset($_POST['submit'])){
+    $name = $_POST['fullname'];
+    $email = $_POST['email'];
+    $phone = $_POST['phone'];
+    $degree = $_POST['degree'];
+    $sql = "INSERT INTO StudentList (fullname, email, phone, degree) VALUES ('$name', '$email', '$phone',' $degree')";
+    if($connect->query($sql)){
+      echo '<script>alert("Success")</script>';
+    }
+    else {
+      die($connect->error);
+    }
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,7 +36,7 @@
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">My Student Details</a>
+            <a class="navbar-brand" href="./">My Student Details</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
             </button>
@@ -37,7 +53,7 @@
     <section class="mt-5 mb-5">
         <div class="container">
             <h1 class="text-center">Add new Student</h1>
-            <form>
+            <form action='' method='post'>
                 <div class="form-group">
                     <label>Upload Your Image</label>
                     <div class="input-group">
@@ -51,26 +67,26 @@
                 </div>
                 <div class="form-group">
                     <label for="full_name">Full Name*</label>
-                    <input type="text" required class="form-control" id="full_name" placeholder="Full Name">
+                    <input type="text" name='fullname' required class="form-control" id="full_name" placeholder="Full Name">
                   </div>
                 <div class="form-group">
                   <label for="exampleInputEmail1">Email address*</label>
-                  <input type="email" required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                  <input type="email" name='email' required class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
                   <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                 </div>
                 <div class="form-group">
                     <label for="phone">Phone Number*</label>
-                    <input type="number" required class="form-control" id="phone" placeholder="Phone Number">
+                    <input type="number" name='phone' required class="form-control" id="phone" placeholder="Phone Number">
                   </div>
                 <div class="form-group">
                 <label for="degree">Degree*</label>
-                <input type="text" required class="form-control" id="degree" placeholder="Degree">
+                <input type="text" name='degree' required class="form-control" id="degree" placeholder="Degree">
                 </div>
                 <div class="form-check">
                   <input type="checkbox" required class="form-check-input" id="exampleCheck1">
                   <label class="form-check-label" for="exampleCheck1">I agree to all <a href='#'>terms & conditions</a></label>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3">Submit</button>
+                <button type="submit" name="submit" class="btn btn-primary mt-3">Submit</button>
               </form>
         </div>
     </section>
